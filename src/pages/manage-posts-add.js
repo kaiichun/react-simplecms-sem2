@@ -6,6 +6,30 @@ export default function ManagePostsAdd() {
   const [title, setTitle] = useState("");
   const [content, setContent] = useState("");
 
+  const submitForm = () => {
+    // 1. get the existing posts from the local storage
+    let posts = JSON.parse(localStorage.getItem("posts"));
+
+    /* 2. make sure the posts is not empty 
+      if posts is empty, then assign the default array to it
+    */
+    if (!posts) posts = []; // assign default value to the posts array
+
+    // 3. push the new item into the posts array
+    posts.push({
+      id: Math.floor(Math.random() * 100000), // get random id
+      title: title, // pass in the value from the title
+      content: content, // pass in the value from the content
+      status: "review", // set the status to "review" as default value
+    });
+
+    // 4. save array into local storage
+    localStorage.setItem("posts", JSON.stringify(posts));
+
+    // 5. redirect back to /manage-posts
+    navigate("/manage-posts");
+  };
+
   return (
     <div>
       <div className="container mx-auto my-5">
@@ -16,21 +40,7 @@ export default function ManagePostsAdd() {
           <form
             onSubmit={(event) => {
               event.preventDefault();
-              let posts = JSON.parse(localStorage.getItem("posts"));
-
-              if (!posts) posts = [];
-
-              posts.push({
-                id: Math.floor(Math.random() * 100000),
-                title: title,
-                content: content,
-                status: "review",
-              });
-              // save array into local storage
-              localStorage.setItem("posts", JSON.stringify(posts));
-
-              // redirect back to /manage-posts
-              navigate("/manage-posts");
+              submitForm();
             }}
           >
             <div className="mb-3">

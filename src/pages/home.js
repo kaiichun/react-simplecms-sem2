@@ -15,7 +15,7 @@ export default function Home() {
                   <p className="card-text">{post.content}</p>
                   <div className="text-end">
                     <Link
-                      to={`/post/` + post.id}
+                      to={`/post/${post.id}`}
                       className="btn btn-primary btn-sm"
                     >
                       Read More

@@ -32,7 +32,7 @@ export default function Dashboard() {
                 Manage Users
               </h5>
               <div className="text-center mt-3">
-                <Link to="/post" className="btn btn-primary btn-sm">
+                <Link to="/manage-users" className="btn btn-primary btn-sm">
                   Access
                 </Link>
               </div>

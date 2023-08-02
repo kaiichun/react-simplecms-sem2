@@ -1,32 +1,32 @@
 import { useEffect, useState } from "react";
 import { Link } from "react-router-dom";
 
-export default function ManagePosts() {
-  const [posts, setPosts] = useState([]);
+export default function ManageUsers() {
+  const [users, setUsers] = useState([]);
 
   useEffect(() => {
-    // 1. get posts from local storage
-    const posts = JSON.parse(localStorage.getItem("posts"));
-    // 2. dump it to posts state
-    setPosts(posts);
+    // 1. get Users from local storage
+    const users = JSON.parse(localStorage.getItem("users"));
+    // 2. dump it to Users state
+    setUsers(users);
   }, []);
 
-  const deletePost = (id) => {
+  const deleteUser = (id) => {
     // 1. use .filter to filter out the selected post
-    const newPosts = posts.filter((p) => parseInt(p.id) !== parseInt(id));
-    // 2. update the newposts into the storage
-    localStorage.setItem("posts", JSON.stringify(newPosts));
+    const newUsers = users.filter((u) => parseInt(u.id) !== parseInt(id));
+    // 2. update the newUsers into the storage
+    localStorage.setItem("users", JSON.stringify(newUsers));
     // 3. update the state
-    setPosts(newPosts);
+    setUsers(newUsers);
   };
 
   return (
     <div className="container mx-auto my-5">
       <div className="d-flex justify-content-between align-items-center mb-2">
-        <h1 className="h1">Manage Posts</h1>
+        <h1 className="h1">Manage Users</h1>
         <div className="text-end">
-          <Link to="/manage-posts-add" className="btn btn-primary btn-sm">
-            Add New Post
+          <Link to="/manage-users-add" className="btn btn-primary btn-sm">
+            Add New User
           </Link>
         </div>
       </div>
@@ -34,41 +34,44 @@ export default function ManagePosts() {
         <table className="table">
           <thead>
             <tr>
-              <th scope="col">Title</th>
-              <th scope="col">Status</th>
+              {/* <th scope="col">ID</th> */}
+              <th scope="col">Name</th>
+              <th scope="col">Email</th>
+              <th scope="col">Role</th>
               <th scope="col" className="text-end">
                 Actions
               </th>
             </tr>
           </thead>
           <tbody>
-            {posts
-              ? posts.map((post) => {
+            {users
+              ? users.map((user) => {
                   return (
-                    <tr key={post.id}>
-                      <td>{post.title}</td>
+                    <tr key={user.id}>
+                      {/* <th scope="row">{user.id}</th> */}
+                      <td>{user.name}</td>
+                      <td>{user.email}</td>
                       <td>
-                        <span className="badge bg-warning">{post.status}</span>
+                        <span className="badge bg-warning">{user.role}</span>
                       </td>
                       <td className="text-end">
                         <div className="buttons">
                           <Link
-                            to="/post"
-                            target="_blank"
-                            className="btn btn-primary btn-sm me-2 disabled"
-                          >
-                            <i className="bi bi-eye"></i>
-                          </Link>
-                          <Link
-                            to={`/manage-posts-edit/${post.id}`}
-                            className="btn btn-secondary btn-sm me-2"
+                            to={`/manage-users-edit/${user.id}`}
+                            className="btn btn-success btn-sm me-2"
                           >
                             <i className="bi bi-pencil"></i>
                           </Link>
+                          {/* <Link
+                            to="/manage-users-changepwd"
+                            className="btn btn-warning btn-sm me-2"
+                          >
+                            <i className="bi bi-key"></i>
+                          </Link> */}
                           <button
                             className="btn btn-danger btn-sm"
                             onClick={() => {
-                              deletePost(post.id);
+                              deleteUser(user.id);
                             }}
                           >
                             <i className="bi bi-trash"></i>

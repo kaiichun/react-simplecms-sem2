@@ -5,6 +5,13 @@ import ManagePosts from "./pages/manage-posts";
 import ManagePostsAdd from "./pages/manage-posts-add";
 import ManagePostsEdit from "./pages/manage-posts-edit";
 import Post from "./pages/post";
+import ManageUsers from "./pages/manage-users";
+import ManageUsersAdd from "./pages/manage-users-add";
+import ManageUsersEdit from "./pages/manage-users-edit";
+
+
+
+
 
 /*
     / -> home
@@ -27,9 +34,12 @@ function App() {
         <Route path="/" element={<Home />} />
         <Route path="/dashboard" element={<Dashboard />} />
         <Route path="/manage-posts-add" element={<ManagePostsAdd />} />
-        <Route path="/manage-posts-edit" element={<ManagePostsEdit />} />
+        <Route path="/manage-posts-edit/:id" element={<ManagePostsEdit />} />
         <Route path="/manage-posts" element={<ManagePosts />} />
         <Route path="/post/:id" element={<Post />} />
+        <Route path="/manage-users" element={<ManageUsers/>} />
+        <Route path="/manage-users-add" element={<ManageUsersAdd />} />
+        <Route path="/manage-users-edit/:id" element={<ManageUsersEdit />} />
       </Routes>
     </Router>
   );
